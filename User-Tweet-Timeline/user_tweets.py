@@ -1,16 +1,21 @@
-import requests
-import os
 import json
+
+import requests
+
+from keys import *
+
 
 # To set your environment variables in your terminal run the following line:
 # export 'BEARER_TOKEN'='<your_bearer_token>'
-bearer_token = os.environ.get("BEARER_TOKEN")
+# bearer_token = os.environ.get("BEARER_TOKEN")
 
 
 def create_url():
     # Replace with user ID below
-    user_id = 2244994945
+    user_id = 8953122
+    user_name = "PolitiFact"
     return "https://api.twitter.com/2/users/{}/tweets".format(user_id)
+    # return "https://api.twitter.com/2/users/by/username/{}".format(user_name)
 
 
 def get_params():
@@ -21,7 +26,10 @@ def get_params():
     # in_reply_to_user_id, lang, non_public_metrics, organic_metrics,
     # possibly_sensitive, promoted_metrics, public_metrics, referenced_tweets,
     # source, text, and withheld
-    return {"tweet.fields": "created_at"}
+    return {
+        "tweet.fields": "created_at",
+        'max_results': 100,
+    }
 
 
 def bearer_oauth(r):
@@ -34,15 +42,12 @@ def bearer_oauth(r):
     return r
 
 
-def connect_to_endpoint(url, params):
+def connect_to_endpoint(url,
+        params):
     response = requests.request("GET", url, auth=bearer_oauth, params=params)
     print(response.status_code)
     if response.status_code != 200:
-        raise Exception(
-            "Request returned an error: {} {}".format(
-                response.status_code, response.text
-            )
-        )
+        raise Exception("Request returned an error: {} {}".format(response.status_code, response.text))
     return response.json()
 
 

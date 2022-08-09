@@ -1,5 +1,9 @@
 *.gem
+*.txt
 *.rbc
+keys.py
+.idea/
+
 /.config
 /coverage/
 /InstalledFiles

@@ -2,12 +2,14 @@ from requests_oauthlib import OAuth1Session
 import os
 import json
 
+from keys import *
+
 # In your terminal please set your environment variables by running the following lines of code.
 # export 'CONSUMER_KEY'='<your_consumer_key>'
 # export 'CONSUMER_SECRET'='<your_consumer_secret>'
 
-consumer_key = os.environ.get("CONSUMER_KEY")
-consumer_secret = os.environ.get("CONSUMER_SECRET")
+# consumer_key = os.environ.get("CONSUMER_KEY")
+# consumer_secret = os.environ.get("CONSUMER_SECRET")
 
 # User fields are adjustable, options include:
 # created_at, description, entities, id, location, name,
